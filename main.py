@@ -8,8 +8,6 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
-lista_usuarios = ['Claudio', 'Junior', 'Tainã', 'Gabriel']
-
 
 app.config['SECRET_KEY'] = '08f071612996239d3f877c5601e24998'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///bancodados_mastertechnology.db'
@@ -19,7 +17,7 @@ db = SQLAlchemy(app)
 
 @app.route("/")
 def home():
-    return render_template('home.html') 
+    return render_template('home.html')
 
 
 @app.route('/contato')
