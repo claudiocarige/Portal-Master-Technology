@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+        <div  class="container">
+
+            <h1>Site em Construção</h1>
+            <!-- Bloco de for para imprimir a lista de nomes que está em Main-->
+           ''' {% for usuario in lista_usuarios %}
+            <p>{{ usuario }}</p>
+            <hr>
+            {% endfor %}'''
+
+
+        </div>
+
+{% endblock %}
