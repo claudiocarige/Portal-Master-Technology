@@ -1,7 +1,7 @@
-from main import db
+from mastertechnology import db
 from datetime import datetime
 
-
+'''  TABELAS DE BANCO DE DADOS  '''
 class Usurious(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
