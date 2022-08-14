@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, validators, BooleanField, ValidationError
 from mastertechnology.models import Usuarios
+from flask_login import current_user
 
 
 '''   FORMULÁRIOS   '''
@@ -26,3 +27,14 @@ class FormCriarConta(FlaskForm):
         usuario = Usuarios.query.filter_by(email=email.data).first()
         if usuario:
             raise ValidationError('E-mail já cadastrado. Cadastre-se com outro e-mail ou faça login para continuar.')
+
+class FormEditarPerfil(FlaskForm):
+    username = StringField('Nome do Usuário', [validators.DataRequired(), validators.Length(min=4, max=25)])
+    email = StringField('E-mail', [validators.DataRequired(), validators.Email(message='** E-mail Inválido **')])
+    botao_submit_editarperfil = SubmitField('Atualizar')
+
+    def validate_email(self, email):
+        if current_user.email != email.data:
+            usuario = Usuarios.query.filter_by(email=email.data).first()
+            if usuario:
+                raise ValidationError('Já existe um usuário com este E-mail. Cadastre outro e-mail para continuar.')

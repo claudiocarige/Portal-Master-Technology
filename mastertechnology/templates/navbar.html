@@ -14,12 +14,35 @@
         </li>
       </ul>
       <ul class = "d_flex navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('login') }}" style="color: cornflowerblue">Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('login') }}" style="color: cornflowerblue">Criar Conta</a>
-        </li>
+         {% if current_user.is_authenticated%}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('criar_post') }}" style="color: cornflowerblue">Criar Post</a>
+            </li>
+
+            <li class="nav-item">
+                {% if current_user.is_authenticated%}
+                <div class="box">
+                    <div class="p1">
+                    <a class="small" href="{{ url_for('perfil') }}" style="color: cornflowerblue">
+                        <center>Perfil<br>
+                        {{"{}".format(current_user.username)}}</center>
+                    </a>
+                    </div>
+                </div>
+                {% endif %}
+
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('sair') }}" style="color: cornflowerblue">Sair</a>
+            </li>
+         {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('login') }}" style="color: cornflowerblue">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('login') }}" style="color: cornflowerblue">Criar Conta</a>
+            </li>
+         {% endif %}
       </ul>
     </div>
   </div>

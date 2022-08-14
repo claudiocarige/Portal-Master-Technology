@@ -12,14 +12,16 @@ app = Flask(__name__)
 
 app.config['SECRET_KEY'] = '08f071612996239d3f877c5601e24998'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///bancodados_mastertechnology.db'
-bcrypt = Bcrypt(app)
 
 '''  CRIA O BANCO DE DADOS'''
 db = SQLAlchemy(app)
 
+bcrypt = Bcrypt(app)
 
 '''GERENCIADOR DE LOGIN DE USUARIO'''
 login_usuario = LoginManager(app)
+login_usuario.login_view = 'login'
+login_usuario.login_message_category = 'alert-info'
 
 
 '''   
