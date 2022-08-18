@@ -15,10 +15,18 @@
                                 <span class="articles ps-3 mt-2">Posts</span>
                                 <span class="number1 ps-4">0</span>
                             </div>
-                            <div class="d-flex flex-column">
-                                <span class="rating pe-3 mt-2">Cursos</span>
-                                <span class="number3 ps-2">0</span>
-                            </div>
+
+                                {% if 'Não informado' in current_user.linguagem %}
+                                    <div class="d-flex flex-column">
+                                        <span class="rating pe-3 mt-2">Cursos</span>
+                                        <span class="number3 ps-2">0</span>
+                                    </div>
+                                {% else %}
+                                    <div class="d-flex flex-column">
+                                        <span class="rating pe-3 mt-2">Cursos</span>
+                                        <span class="number3 ps-2">{{ current_user.linguagem.count(';') + 1 }}</span>
+                                    </div>
+                                {% endif %}
                        </div>
                        <div class="button mt-2 d-flex flex-row align-items-center">
                           <a class="w-100 ml-2" href="{{ url_for('editar_perfil') }}">
@@ -29,6 +37,19 @@
                 </div>
             </div>
          </div>
+            <div class="row justify-content-center">
+                <div class="col col-4" style="text-align: center">
+                    <br><strong>Habilidades</strong><br>
+                    {% if 'Não informado' not in current_user.linguagem %}
+                        {% for curso in current_user.linguagem.split(';') %}
+                            <button type="button" class="btn btn-success mt-2" disabled>{{curso}}</button>
+
+                        {% endfor %}
+                    {% else %}
+                        <button type="button" class="btn btn-success mt-2" disabled><strong>Nenhuma</strong></button>
+                    {% endif %}
+                </div>
+            </div>
     {% block editar_perfil%}
 
     {% endblock %}

@@ -3,7 +3,10 @@ from datetime import datetime
 from flask_login import UserMixin
 
 
-'''  TABELAS DE BANCO DE DADOS  '''
+'''  
+     *   Classes dos Formulários  
+'''
+
 
 @login_usuario.user_loader
 def load_usuario(id_usuario):
@@ -18,6 +21,7 @@ class Usuarios(db.Model, UserMixin):
     senha = db.Column(db.String, nullable=False)
     foto_perfil = db.Column(db.String, default='default.jpg')
     postagens = db.relationship('Postagens', backref='autor', lazy=True)
+    linguagem = db.Column(db.String, nullable=False, default="Não informado")
 
 
 class Postagens(db.Model):

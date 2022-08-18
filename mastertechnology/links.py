@@ -3,10 +3,14 @@ from flask_login import current_user, login_user, logout_user, login_required
 from mastertechnology import app, db, bcrypt
 from mastertechnology.forms import FormLogin, FormCriarConta, FormEditarPerfil
 from mastertechnology.models import Usuarios
+import secrets
+import os
+from PIL import Image
 
 
-'''    FUNÇÕES DE PÁGINA     '''
-
+'''   
+    *   FUNÇÕES DE PÁGINA     
+'''
 
 
 @app.route("/")
@@ -58,6 +62,27 @@ def perfil():
     return render_template('perfil.html', foto_perfil=foto_perfil)
 
 
+def salvar_imagem(imagem):
+    codigo = secrets.token_hex(8)
+    nome, extensao = os.path.splitext(imagem.filename)
+    nome_completo = nome + codigo + extensao
+    caminho_arquivo = os.path.join(app.root_path, 'static/fotos_perfil', nome_completo)
+    tamanho = (200, 200)
+    imagem_reduzida = Image.open(imagem)
+    imagem_reduzida.thumbnail(tamanho)
+    imagem_reduzida.save(caminho_arquivo)
+    return nome_completo
+
+
+def atualizar_linguagens(form):
+    lista_linguagem = [campo.label.text for campo in form if 'linguagem_' in campo.name and campo.data]
+    '''for campo in form:
+        if 'linguagem_' in campo.name:
+            if campo.data:
+                lista_linguagem.append(campo.label.text)'''
+    return ";".join(lista_linguagem)
+
+
 @app.route('/perfil/editar', methods=['GET', 'POST'])
 @login_required
 def editar_perfil():
@@ -65,6 +90,10 @@ def editar_perfil():
     if form.validate_on_submit():
         current_user.email = form.email.data
         current_user.username = form.username.data
+        if form.foto_perfil.data:
+            nome_imagem = salvar_imagem(form.foto_perfil.data)
+            current_user.foto_perfil = nome_imagem
+        current_user.linguagem = atualizar_linguagens(form)
         db.session.commit()
         flash('Edição efetuada com sucesso.', 'alert-success')
         return redirect(url_for('perfil'))
