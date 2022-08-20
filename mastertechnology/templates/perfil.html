@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block body %}
-        <div class="container mt-5 d-flex justify-content-center">
+        <div class="container mt-3 d-flex justify-content-center">
             <div class="card p-3">
                 <div class="d-flex align-items-center">
                     <div class="image pe-4">
@@ -43,14 +43,13 @@
                     {% if 'Não informado' not in current_user.linguagem %}
                         {% for curso in current_user.linguagem.split(';') %}
                             <button type="button" class="btn btn-success mt-2" disabled>{{curso}}</button>
-
                         {% endfor %}
                     {% else %}
                         <button type="button" class="btn btn-success mt-2" disabled><strong>Nenhuma</strong></button>
                     {% endif %}
                 </div>
             </div>
-    {% block editar_perfil%}
+    {% block editar_perfil %}
 
     {% endblock %}
 

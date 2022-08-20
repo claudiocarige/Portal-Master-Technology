@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-from wtforms import StringField, PasswordField, SubmitField, validators, BooleanField, ValidationError
+from wtforms import StringField, PasswordField, SubmitField, validators, BooleanField, ValidationError, TextAreaField
 from mastertechnology.models import Usuarios
 from flask_login import current_user
 
@@ -28,6 +28,12 @@ class FormCriarConta(FlaskForm):
         usuario = Usuarios.query.filter_by(email=email.data).first()
         if usuario:
             raise ValidationError('E-mail já cadastrado. Cadastre-se com outro e-mail ou faça login para continuar.')
+
+
+class FormCriarPost(FlaskForm):
+    titulo = StringField('Título do Post', [validators.DataRequired(), validators.Length(min=4, max=140)])
+    corpo_post = TextAreaField('Escreva seu texto aqui!', [validators.DataRequired()])
+    botao_submit_criarpost = SubmitField('Criar Post')
 
 
 class FormEditarPerfil(FlaskForm):

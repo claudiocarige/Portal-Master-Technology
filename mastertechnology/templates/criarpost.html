@@ -1,14 +1,45 @@
 {% extends 'base.html' %}
 
 {% block body %}
-
-        <div  class="container">
-
-            <div class="border p-1 mt-2 col-md-10" style="margin:0 auto;text-align:center">
-                <h1 >Página  <strong style="color:blue"> Criar Post </strong> em Construção </h1>
-            </div>
-
-
+        <div  class="container text-bg-light p-4">
+            <h1 style="color: blue">Crie seu Post</h1>
+            <hr>
+            <div class="row">
+                <div class="col">
+                    <form method="POST" action="" class="border p-4 mt-2">
+                        {{form_post.csrf_token}}
+                        <legend>Criar Post</legend>
+                            <fieldset>
+                                 <div class="form-group">
+                                    {{form_post.titulo.label(class="form-control-label")}}
+                                    {% if form_post.titulo.errors %}
+                                        {{ form_post.titulo(class="form-control is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for erro in form_post.titulo.errors %}
+                                            {{ erro }}
+                                        {% endfor %}
+                                    </div>
+                                    {% else %}
+                                        {{ form_post.titulo(class="form-control") }}
+                                    {% endif %}
+                                 </div>
+                                 <div class="form-group">
+                                    {{form_post.corpo_post.label(class="form-control-label")}}
+                                    {% if form_post.corpo_post.errors %}
+                                        {{ form_post.corpo_post(class="form-control is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for erro in form_post.corpo_post.errors %}
+                                            {{ erro }}
+                                        {% endfor %}
+                                    </div>
+                                    {% else %}
+                                        {{ form_post.corpo_post(class="form-control") }}
+                                    {% endif %}
+                                 </div>
+                            </fieldset>
+                        {{form_post.botao_submit_criarpost(class="btn btn-primary mt-2")}}
+                    </form>
+                </div>
+           </div>
         </div>
-
 {% endblock %}

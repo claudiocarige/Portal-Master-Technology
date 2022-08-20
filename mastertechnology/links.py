@@ -1,11 +1,13 @@
 from flask import render_template, redirect, url_for, flash, request
 from flask_login import current_user, login_user, logout_user, login_required
 from mastertechnology import app, db, bcrypt
-from mastertechnology.forms import FormLogin, FormCriarConta, FormEditarPerfil
-from mastertechnology.models import Usuarios
+from mastertechnology.forms import FormLogin, FormCriarConta, FormEditarPerfil, FormCriarPost
+from mastertechnology.models import Usuarios, Postagens
 import secrets
 import os
 from PIL import Image
+import requests
+import json
 
 
 '''   
@@ -13,9 +15,12 @@ from PIL import Image
 '''
 
 
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 def home():
-    return render_template('home.html')
+    cotacoes = requests.get('https://economia.awesomeapi.com.br/json/all')
+    cotacoes_dicio = cotacoes.json()
+    posts = Postagens.query.order_by(Postagens.id.desc())
+    return render_template('home.html', posts=posts, cotacoes_dicio=cotacoes_dicio)
 
 
 @app.route('/contato')
@@ -26,7 +31,8 @@ def contato():
 @app.route('/usuarios')
 @login_required
 def usuarios():
-    return render_template('usuarios.html')
+    lista_usuarios = Usuarios.query.all()
+    return render_template('usuarios.html', lista_usuarios=lista_usuarios)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -100,14 +106,43 @@ def editar_perfil():
     elif request.method == "GET":
         form.email.data = current_user.email
         form.username.data = current_user.username
+        if 'Python' in current_user.linguagem:
+            form.linguagem_python.data = True
+        elif 'Java' in current_user.linguagem:
+            form.linguagem_java.data = True
+        elif 'JavaScript' in current_user.linguagem:
+            form.linguagem_javascript.data = True
+        elif 'PHP' in current_user.linguagem:
+            form.linguagem_php.data = True
+        elif 'HTML' in current_user.linguagem:
+            form.linguagem_html.data = True
+        elif 'CSS' in current_user.linguagem:
+            form.linguagem_css.data = True
+        elif 'C' in current_user.linguagem:
+            form.c.data = True
+        elif 'C++' in current_user.linguagem:
+            form.linguagem_c_mais_mais.data = True
+        elif 'C#' in current_user.linguagem:
+            form.linguagem_c_sharp.data = True
+        elif 'Ruby' in current_user.linguagem:
+            form.linguagem_ruby = True
+        elif 'Euphoria' in current_user.linguagem:
+            form.linguagem_euphoria = True
     foto_perfil = url_for('static', filename='fotos_perfil/{}'.format(current_user.foto_perfil))
     return render_template('editarperfil.html', foto_perfil=foto_perfil, form=form)
 
 
-@app.route('/post/criar')
+@app.route('/post/criar', methods=['GET', 'POST'])
 @login_required
 def criar_post():
-    return render_template('criarpost.html')
+    form_post = FormCriarPost()
+    if form_post.validate_on_submit():
+        post = Postagens(titulo=form_post.titulo.data, corpo_post=form_post.corpo_post.data, autor=current_user)
+        db.session.add(post)
+        db.session.commit()
+        flash('Post criado com Sucesso!', 'alert-success')
+        return redirect(url_for('home'))
+    return render_template('criarpost.html', form_post=form_post)
 
 
 @app.route('/sair')
