@@ -56,3 +56,7 @@ body{
 .justext{
     text-align: justify;
 }
+.fundo{
+
+    background: black !important;
+}

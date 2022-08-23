@@ -1,4 +1,4 @@
-from flask import render_template, redirect, url_for, flash, request
+from flask import render_template, redirect, url_for, flash, request, abort
 from flask_login import current_user, login_user, logout_user, login_required
 from mastertechnology import app, db, bcrypt
 from mastertechnology.forms import FormLogin, FormCriarConta, FormEditarPerfil, FormCriarPost
@@ -8,7 +8,6 @@ import os
 from PIL import Image
 import requests
 import json
-
 
 '''   
     *   FUNÇÕES DE PÁGINA     
@@ -82,10 +81,6 @@ def salvar_imagem(imagem):
 
 def atualizar_linguagens(form):
     lista_linguagem = [campo.label.text for campo in form if 'linguagem_' in campo.name and campo.data]
-    '''for campo in form:
-        if 'linguagem_' in campo.name:
-            if campo.data:
-                lista_linguagem.append(campo.label.text)'''
     return ";".join(lista_linguagem)
 
 
@@ -119,7 +114,7 @@ def editar_perfil():
         elif 'CSS' in current_user.linguagem:
             form.linguagem_css.data = True
         elif 'C' in current_user.linguagem:
-            form.c.data = True
+            form.linguagem_c.data = True
         elif 'C++' in current_user.linguagem:
             form.linguagem_c_mais_mais.data = True
         elif 'C#' in current_user.linguagem:
@@ -151,3 +146,38 @@ def sair():
     logout_user()
     flash(f'Logout feito com sucesso.', 'alert-success')
     return redirect(url_for('home'))
+
+
+@app.route('/post/<post_id>', methods=['GET', 'POST'])
+@login_required
+def exibir_post(post_id):
+    post = Postagens.query.get(post_id)
+    if current_user == post.autor:
+        form_exibir_post = FormCriarPost()
+        if request.method == 'GET':
+            form_exibir_post.titulo.data = post.titulo
+            form_exibir_post.corpo_post.data = post.corpo_post
+        elif form_exibir_post.validate_on_submit():
+            post.titulo = form_exibir_post.titulo.data
+            post.corpo_post = form_exibir_post.corpo_post.data
+            db.session.commit()
+            flash('Post Atualizado com Sucesso.', 'alert-success')
+            return redirect(url_for('home'))
+    else:
+        form_exibir_post = None
+    return render_template('post.html', post=post, form_exibir_post=form_exibir_post)
+
+
+@app.route('/post/<post_id>/excluir', methods=['GET', 'POST'])
+@login_required
+def excluir_post(post_id):
+    excluirpost = Postagens.query.get(post_id)
+    if current_user == excluirpost.autor:
+        db.session.delete(excluirpost)
+        db.session.commit()
+        flash('Post excluido com sucesso.', 'alert-danger')
+        return redirect(url_for('home'))
+    else:
+        abort(403)
+
+

@@ -58,3 +58,7 @@ class FormEditarPerfil(FlaskForm):
             usuario = Usuarios.query.filter_by(email=email.data).first()
             if usuario:
                 raise ValidationError('Já existe um usuário com este E-mail. Cadastre outro e-mail para continuar.')
+
+
+
+
