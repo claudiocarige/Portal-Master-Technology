@@ -20,7 +20,7 @@
                            <div class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats">
                                 <div class="d-flex flex-column">
                                     <span class="articles ps-3 mt-2">Posts</span>
-                                    <span class="number1 ps-4">0</span>
+                                    <span class="number1 ps-4">{{ usuario.contagem_post()}}</span>
                                 </div>
 
                                     {% if 'Não informado' in usuario.linguagem %}

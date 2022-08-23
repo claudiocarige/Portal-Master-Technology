@@ -11,22 +11,21 @@
                        <center> <h4 class="mb-1 mt-0">{{current_user.username}}</h4>
                        <span>{{ current_user.email}}</span></center>
                        <div class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats">
+                          <div class="d-flex flex-column">
+                              <span class="articles ps-3 mt-2">Posts</span>
+                              <span class="number1 ps-4">{{ current_user.contagem_post()}}</span>
+                          </div>
+                          {% if 'Não informado' in current_user.linguagem %}
                             <div class="d-flex flex-column">
-                                <span class="articles ps-3 mt-2">Posts</span>
-                                <span class="number1 ps-4">0</span>
+                                <span class="rating pe-3 mt-2">Cursos</span>
+                                <span class="number3 ps-2">0</span>
                             </div>
-
-                                {% if 'Não informado' in current_user.linguagem %}
-                                    <div class="d-flex flex-column">
-                                        <span class="rating pe-3 mt-2">Cursos</span>
-                                        <span class="number3 ps-2">0</span>
-                                    </div>
-                                {% else %}
-                                    <div class="d-flex flex-column">
-                                        <span class="rating pe-3 mt-2">Cursos</span>
-                                        <span class="number3 ps-2">{{ current_user.linguagem.count(';') + 1 }}</span>
-                                    </div>
-                                {% endif %}
+                          {% else %}
+                            <div class="d-flex flex-column">
+                                <span class="rating pe-3 mt-2">Cursos</span>
+                                <span class="number3 ps-2">{{ current_user.linguagem.count(';') + 1 }}</span>
+                            </div>
+                          {% endif %}
                        </div>
                        <div class="button mt-2 d-flex flex-row align-items-center">
                           <a class="w-100 ml-2" href="{{ url_for('editar_perfil') }}">

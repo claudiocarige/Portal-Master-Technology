@@ -2,43 +2,44 @@
 
 {% block body %}
     <div class=" p-1 mt-1 col-md-10" style="margin:0 auto; ">
-            <h1 class="mt-1 " style="text-align:center"> <strong style="color:blue">POST</strong></h1>
-            <h2 class="p-1 "  style="text-align:center ">Compartilhe conhecimento!</h2>
-            <hr>
-            <div class=" row mt-4 p-3  meupost ">
-                <div class="col col-3">
-                    <div class="post mt-3 " style="text-align:center" >
-                            <div class="image pe-4">
-                               <img src="{{ url_for('static', filename='fotos_perfil/{}'.format(post.autor.foto_perfil)) }}" class="rounded" width="200">
-                            </div>
-                            <div>
-                                <h6 class="" style="color: blue">Autor: <strong>{{ post.autor.username }}</strong></h6>
-                                Habilidades<br>
-                                {% if 'Não informado' not in post.autor.linguagem %}
-                                    {% for curso in post.autor.linguagem.split(';') %}
-                                       <button type="button" class="btn btn-success mt-1" disabled>{{curso}}</button>
-                                    {% endfor %}
-                                {% else %}
-                                    <p><strong>Nenhuma</strong></p>
-                                {% endif %}
-                            </div>
+        <h1 class="mt-1 " style="text-align:center"> <strong style="color:blue">POST</strong></h1>
+        <h2 class="p-1 "  style="text-align:center ">Compartilhe conhecimento!</h2>
+        <hr>
+        <div class=" row mt-4 p-3  meupost ">
+            <div class="col col-3">
+                <div class="post mt-3 " style="text-align:center" >
+                    <div class="image pe-4">
+                       <img src="{{ url_for('static', filename='fotos_perfil/{}'.format(post.autor.foto_perfil)) }}" class="rounded" width="200">
+                    </div>
+                    <div>
+                        <h6 class="" style="color: blue">Autor: <strong>{{ post.autor.username }}</strong></h6>
+                        Habilidades<br>
+                        {% if 'Não informado' not in post.autor.linguagem %}
+                            {% for curso in post.autor.linguagem.split(';') %}
+                               <button type="button" class="btn btn-success mt-1" disabled>{{curso}}</button>
+                            {% endfor %}
+                        {% else %}
+                            <p><strong>Nenhuma</strong></p>
+                        {% endif %}
                     </div>
                 </div>
-                <div class="container col col-6 mt-3 "">
-                   <div>
-                      <h5 style="text-align:center"><strong>{{ post.titulo }}</strong><small class="" style="color: blue">
-                         {% if form_exibir_post %}
-                             - <a href="#form_editarpost">Editar Post</a>  /
-                               <a href="#" class="text-danger" data-bs-toggle="modal" data-bs-target="#excluir_post">Excluir Post</a>
-                          {% endif %}
-                      </small></h5>
-                      <small class="text-muted" style="font-size: 12px" >Data de criação: {{ post.data_criacao.strftime('%d/%m/%Y')}}
-                      </small>
-                      <hr>
-                   </div>
-                    <p class="justext">{{ post.corpo_post }}</p>
-                </div>
             </div>
+            <div class="container col col-6 mt-3 "">
+               <div>
+                  <h5 style="text-align:center"><strong>{{ post.titulo }}</strong><small class="" style="color: blue">
+                     {% if form_exibir_post %}
+                         - <a href="#form_editarpost">Editar Post</a>  /
+                           <a href="#" class="text-danger" data-bs-toggle="modal" data-bs-target="#excluir_post">Excluir Post</a>
+                      {% endif %}
+                  </small>
+                  </h5>
+                  <small class="text-muted" style="font-size: 12px" >Data de criação: {{ post.data_criacao.strftime('%d/%m/%Y')}}
+                  </small>
+                  <hr>
+               </div>
+                <p class="justext">{{ post.corpo_post }}</p>
+            </div>
+        </div>
 
         {% if form_exibir_post %}
         <div  class="container text-bg-light p-4">
@@ -82,7 +83,6 @@
                 </div>
            </div>
         </div>
-
        {% endif %}
 
     </div>
