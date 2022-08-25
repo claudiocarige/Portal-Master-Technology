@@ -60,5 +60,11 @@ class FormEditarPerfil(FlaskForm):
                 raise ValidationError('Já existe um usuário com este E-mail. Cadastre outro e-mail para continuar.')
 
 
+class FormCotacao(FlaskForm):
+    moeda = StringField('Digite a Moeda.')
+    botao_submit_cotacao = SubmitField('Cotar')
 
 
+class FormBuscaCep(FlaskForm):
+    cep = StringField('Digite o Cep.')
+    botao_submit_cep = SubmitField('Buscar')

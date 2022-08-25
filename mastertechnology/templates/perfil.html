@@ -41,7 +41,7 @@
                     <br><strong>Habilidades</strong><br>
                     {% if 'Não informado' not in current_user.linguagem %}
                         {% for curso in current_user.linguagem.split(';') %}
-                            <button type="button" class="btn btn-success mt-2" disabled>{{curso}}</button>
+                            <button type="button" class="btn btn-outline-primary mt-2" disabled>{{curso}}</button>
                         {% endfor %}
                     {% else %}
                         <button type="button" class="btn btn-success mt-2" disabled><strong>Nenhuma</strong></button>

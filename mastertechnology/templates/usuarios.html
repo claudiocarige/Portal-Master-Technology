@@ -1,14 +1,12 @@
 {% extends 'base.html' %}
 
 {% block body %}
-
         <div  class="container">
-            <div class="border p-1 mt-3 col-md-3" style="margin:0 auto;text-align:center">
+            <div class="col-md-3" style="margin:0 auto;text-align:center">
                 <h1><strong style="color:blue">Usuários</strong> </h1>
             </div>
-            <!-- Bloco de for para imprimir a lista de nomes que está em Main-->
-           {% for usuario in lista_usuarios %}
-               <div class="container mt-3 d-flex justify-content-center">
+            {% for usuario in lista_usuarios %}
+              <div class="container mt-3 d-flex justify-content-center">
                 <div class="card p-3">
                     <div class="d-flex align-items-center">
                         <div class="image pe-4">
@@ -16,49 +14,41 @@
                         </div>
                         <div class="ml-3 w-100">
                            <center> <h4 class="mb-1 mt-0">{{usuario.username}}</h4>
-                           <span>{{ usuario.email}}</span></center>
-                           <div class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats">
-                                <div class="d-flex flex-column">
-                                    <span class="articles ps-3 mt-2">Posts</span>
-                                    <span class="number1 ps-4">{{ usuario.contagem_post()}}</span>
-                                </div>
-
-                                    {% if 'Não informado' in usuario.linguagem %}
-                                        <div class="d-flex flex-column">
-                                            <span class="rating pe-3 mt-2">Cursos</span>
-                                            <span class="number3 ps-2">0</span>
-                                        </div>
-                                    {% else %}
-                                        <div class="d-flex flex-column">
-                                            <span class="rating pe-3 mt-2">Cursos</span>
-                                            <span class="number3 ps-2">{{ usuario.linguagem.count(';') + 1 }}</span>
-                                        </div>
-                                    {% endif %}
+                            <span>{{ usuario.email}}</span></center>
+                            <div class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats">
+                            <div class="d-flex flex-column">
+                                <span class="articles ps-3 mt-2">Posts</span>
+                                <span class="number1 ps-4">{{ usuario.contagem_post()}}</span>
+                            </div>
+                                {% if 'Não informado' in usuario.linguagem %}
+                                    <div class="d-flex flex-column">
+                                        <span class="rating pe-3 mt-2">Cursos</span>
+                                        <span class="number3 ps-2">0</span>
+                                    </div>
+                                {% else %}
+                                    <div class="d-flex flex-column">
+                                        <span class="rating pe-3 mt-2">Cursos</span>
+                                        <span class="number3 ps-2">{{ usuario.linguagem.count(';') + 1 }}</span>
+                                    </div>
+                                {% endif %}
                            </div>
-
                         </div>
                     </div>
                 </div>
-             </div>
+              </div>
                 <div class="row justify-content-center">
                     <div class="col col-4" style="text-align: center">
                         <br><strong>Habilidades</strong><br>
                         {% if 'Não informado' not in usuario.linguagem %}
                             {% for curso in usuario.linguagem.split(';') %}
-                                <button type="button" class="btn btn-success mt-2" disabled>{{curso}}</button>
+                                <button type="button" class="btn btn-outline-primary mt-2" disabled>{{curso}}</button>
                             {% endfor %}
                         {% else %}
                             <button type="button" class="btn btn-success mt-2" disabled><strong>Nenhuma</strong></button>
                         {% endif %}
                     </div>
                 </div>
-
-           {% endfor %}
-
-
+            {% endfor %}
         </div>
-
-    <div class="row mt-5">
-
-    </div>
+    <div class="row mt-5"></div>
 {% endblock %}

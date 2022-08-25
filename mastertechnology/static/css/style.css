@@ -1,0 +1,20 @@
+
+.credit{
+    background: black;
+    font-size: 1.3em;
+    color: whitesmoke;
+    padding: 1em;
+    border-radius: 0.5em;
+
+}
+
+.credit a{
+    color: turquoise;
+    transition: 1s;
+
+}
+
+.credit a:hover{
+    color: white;
+    text-shadow: 0 0 8px white;
+}

@@ -1,12 +1,13 @@
 from flask import render_template, redirect, url_for, flash, request, abort
 from flask_login import current_user, login_user, logout_user, login_required
 from mastertechnology import app, db, bcrypt
-from mastertechnology.forms import FormLogin, FormCriarConta, FormEditarPerfil, FormCriarPost
+from mastertechnology.forms import FormLogin, FormCriarConta, FormEditarPerfil, FormCriarPost, FormCotacao, FormBuscaCep
 from mastertechnology.models import Usuarios, Postagens
 import secrets
 import os
 from PIL import Image
 import requests
+from time import sleep
 import json
 
 '''   
@@ -14,12 +15,40 @@ import json
 '''
 
 
-@app.route("/", methods=['GET', 'POST'])
-def home():
+def busca_cep(cep):
+    cep = str(cep)
+    caracter = ",.-+/ '=*<;:>!@#$%&*)("
+    for x in range(len(caracter)):
+        cep = cep.replace(caracter[x], "")
+    if cep:
+        cep_busca = 'https://cep.awesomeapi.com.br/json/' + cep
+        cep = requests.get(cep_busca)
+        cep_list = cep.json()
+        if 'code' in cep_list.keys():
+            if 'code' in cep_list:
+                cep_invalido = 'CEP invalido!'
+                return cep_invalido
+        else:
+            return '{}, Bairro: {},    Cidade: {},    Estado: {} '.format(cep_list['address'], cep_list['district'], cep_list['city'], cep_list['state'])
+
+
+def lista_de_moedas():
+    lista = ['USD', 'USDT', 'EUR', 'CAD', 'ARS',
+             'GBP', 'BTC', 'LTC', 'JPY', 'CHF',
+             'AUD', 'CNY', 'XRP','DOGE']
+    return lista
+
+
+def cotacao():
     cotacoes = requests.get('https://economia.awesomeapi.com.br/json/all')
     cotacoes_dicio = cotacoes.json()
+    return cotacoes_dicio
+
+
+@app.route("/", methods=['GET', 'POST'])
+def home():
     posts = Postagens.query.order_by(Postagens.id.desc())
-    return render_template('home.html', posts=posts, cotacoes_dicio=cotacoes_dicio)
+    return render_template('home.html', posts=posts)
 
 
 @app.route('/contato')
@@ -31,7 +60,29 @@ def contato():
 @login_required
 def usuarios():
     lista_usuarios = Usuarios.query.all()
+    if not usuarios:
+        flash('Para entrar nesta página pracisa fazer login', 'alert-danger')
     return render_template('usuarios.html', lista_usuarios=lista_usuarios)
+
+
+@app.route('/consulta', methods=['GET', 'POST'])
+def consulta():
+    form_moeda = FormCotacao()
+    form_cep = FormBuscaCep()
+    cotacoes_dicio = cotacao()
+    lista_moeda = lista_de_moedas()
+    moeda = str(form_moeda.moeda.data).strip().upper()
+    endereco = busca_cep(form_cep.cep.data)
+    if form_moeda.validate_on_submit() and 'botao_submit_cotacao' in request.form:
+        if moeda not in lista_moeda:
+            flash('Código da Moeda é Inválido', 'alert-danger')
+            return redirect(url_for('consulta'))
+    if form_cep.validate_on_submit() and 'botao_submit_cep' in request.form:
+        if endereco == 'CEP invalido!':
+            flash('Cep não encontrado', 'alert-danger')
+            return redirect(url_for('consulta'))
+    return render_template('consulta.html', form_moeda=form_moeda, cotacoes_dicio=cotacoes_dicio, moeda=moeda,
+                           form_cep=form_cep, endereco=endereco)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -179,5 +230,6 @@ def excluir_post(post_id):
         return redirect(url_for('home'))
     else:
         abort(403)
+
 
 

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block body %}
-    <div class=" p-1 mt-1 col-md-10" style="margin:0 auto; ">
+    <div class="col-md-10" style="margin:0 auto; ">
         <h1 class="mt-1 " style="text-align:center"> <strong style="color:blue">POST</strong></h1>
         <h2 class="p-1 "  style="text-align:center ">Compartilhe conhecimento!</h2>
         <hr>
@@ -40,7 +40,6 @@
                 <p class="justext">{{ post.corpo_post }}</p>
             </div>
         </div>
-
         {% if form_exibir_post %}
         <div  class="container text-bg-light p-4">
             <h3 style="color: blue">Edite seu Post</h3>
@@ -84,7 +83,6 @@
            </div>
         </div>
        {% endif %}
-
     </div>
     <!-- Popup Bootstrap-->
     <div class="modal fade" id="excluir_post" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
