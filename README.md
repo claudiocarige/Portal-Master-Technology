@@ -1,6 +1,8 @@
 # Portal-Master-Technology
 
-Projeto de criação de Portal para compartilhamento e divulgação de material para desenvolvedores.
+Projeto de criação de Portal para compartilhamento e divulgação de material para desenvolvedores. 
+
+O porjeto foi feito em linguagem Python com o microframework Flask.
 
 O portal é público e pode ser acessado por todos.
 
@@ -10,5 +12,7 @@ Acessar a página de API's de busca de cep e cotação de moeda internacional.
 
 Para criar um post é necessário criar uma conta e fazer login. :id:
 
-Com login validado o usuário poderá visualizar todos os usuários cadastrados.
+Com login validado o usuário poderá visualizar todos os usuários cadastrados, criar, editar e excluir seu post.
+
+
 
