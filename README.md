@@ -1,6 +1,6 @@
 # Portal-Master-Technology
 
-##Projeto de criação de Portal para compartilhamento e divulgação de material para desenvolvedores.
+Projeto de criação de Portal para compartilhamento e divulgação de material para desenvolvedores.
 
 O portal é público e pode ser acessado por todos.
 
