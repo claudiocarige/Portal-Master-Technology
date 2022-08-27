@@ -2,7 +2,7 @@
 
 Projeto de criação de Portal para compartilhamento e divulgação de material para desenvolvedores. 
 
-O porjeto foi feito em linguagem Python com o microframework Flask.
+O porjeto foi construido com a linguagem Python, na versão 3.10, com o microframework Flask.
 
 O portal é público e pode ser acessado por todos.
 
