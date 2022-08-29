@@ -45,7 +45,7 @@ body{
 }
 
 .rating{
-    font-size:10px;
+  font-size:10px;
   color: #a1aab9;
 }
 
@@ -55,85 +55,85 @@ body{
 
 .meupost{
 
-    background: azure !important;
+  background: azure !important;
 }
 
 .meupost2{
 
-    background: powderblue !important;
+  background: powderblue !important;
 }
 
 .justext{
-    text-align: justify;
+  text-align: justify;
 }
 .fundo{
 
-    background: black !important;
+  background: black !important;
 }
 
 .divs {
-    width: 300px;
-    height: 300px;
+  width: 300px;
+  height: 300px;
 }
 
 .divs2{
-    width: 200px;
-    height: 300px;
+  width: 200px;
+  height: 300px;
 }
 
 .divs3{
-    width: 1980px;
-    height: 1080px;
+  width: 1980px;
+  height: 1080px;
 }
 
 .divFixed {
-    background-color: aquamarine;
-    border: 2px solid black;
-    border-radius: 20px;
-    position: fixed;
-    top: 150px;
-    right: 350px;
+  background-color: aquamarine;
+  border: 2px solid black;
+  border-radius: 20px;
+  position: fixed;
+  top: 150px;
+  right: 350px;
 }
 
 .divSticky{
-    background-color: grey;
-    position:sticky;
-    top: 0px;
+  background-color: grey;
+  position:sticky;
+  top: 0px;
 
 }
 
 .divFixedCep {
-    background-color: aquamarine;
-    border: 2px solid black;
-    border-radius: 20px;
-    position: fixed;
-    top: 150px;
-    left: 350px;
+  background-color: aquamarine;
+  border: 2px solid black;
+  border-radius: 20px;
+  position: fixed;
+  top: 150px;
+  left: 350px;
 }
 
 .divFixedCard {
-    background-color: azure;
+  background-color: azure;
 
-    position: fixed;
-    top: 150px;
-    right: 150px;
+  position: fixed;
+  top: 150px;
+  right: 150px;
 }
 
 .cabecalho {
-align-items: center;
-background: azure;
-display: inline-block;
-justify-content: space-between;
-padding-left: 5rem;
-padding-right: 5rem;
-position: fixed;
-z-index: 5;
-width: 100%;
+  align-items: center;
+  background: azure;
+  display: inline-block;
+  justify-content: space-between;
+  padding-left: 5rem;
+  padding-right: 5rem;
+  position: fixed;
+  z-index: 5;
+  width: 100%;
 }
 
 .menu__lista {
-display: flex;
-margin-right: 4rem;
+  display: flex;
+  margin-right: 4rem;
 }
 
 .bgSizeContain {
@@ -155,7 +155,7 @@ margin-right: 4rem;
 }
 
 .posthome{
-    border-radius: 20px;
-    border: 1px solid darkblue;
+  border-radius: 20px;
+  border: 1px solid darkblue;
 
 }

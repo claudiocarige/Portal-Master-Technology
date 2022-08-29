@@ -77,10 +77,7 @@ def consulta():
         if moeda not in lista_moeda:
             flash('Código da Moeda é Inválido', 'alert-danger')
             return redirect(url_for('consulta'))
-    if form_cep.validate_on_submit() and 'botao_submit_cep' in request.form:
-        if endereco == 'CEP invalido!':
-            flash('Cep não encontrado', 'alert-danger')
-            return redirect(url_for('consulta'))
+
     return render_template('consulta.html', form_moeda=form_moeda, cotacoes_dicio=cotacoes_dicio, moeda=moeda,
                            form_cep=form_cep, endereco=endereco)
 

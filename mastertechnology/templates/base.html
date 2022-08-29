@@ -16,7 +16,7 @@
     <body>
 
         {% include 'navbar.html' %}
-        <div class="container mt-4 p-5">
+         <div class="container mt-4 p-5">
             {% with mensagens = get_flashed_messages(with_categories=True) %}
                 {% if mensagens %}
                     {% for categoria, mensagem in mensagens %}
