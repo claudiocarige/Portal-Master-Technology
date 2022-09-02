@@ -9,7 +9,8 @@
             <div class="col col-3">
                 <div class="post mt-3 " style="text-align:center" >
                     <div class="image pe-4">
-                       <img src="{{ url_for('static', filename='fotos_perfil/{}'.format(post.autor.foto_perfil)) }}" class="rounded" width="200">
+                       <img src="{{ url_for('static', filename='fotos_perfil/{}'.format(post.autor.foto_perfil)) }}"
+                        class="rounded" width="200">
                     </div>
                     <div>
                         <h6 class="" style="color: blue">Autor: <strong>{{ post.autor.username }}</strong></h6>
@@ -29,7 +30,9 @@
                   <h5 style="text-align:center"><strong>{{ post.titulo }}</strong><small class="" style="color: blue">
                      {% if form_exibir_post %}
                          - <a href="#form_editarpost">Editar Post</a>  /
-                           <a href="#" class="text-danger" data-bs-toggle="modal" data-bs-target="#excluir_post">Excluir Post</a>
+                           <a href="#" class="text-danger" data-bs-toggle="modal" data-bs-target="#excluir_post">
+                               Excluir Post
+                           </a>
                       {% endif %}
                   </small>
                   </h5>

@@ -1,87 +1,91 @@
 {% extends 'base.html' %}
 
 {% block body %}
-        <main class="main">
-           <div class="credit">
-             <div class="divs divFixedCep  meupost2">
-                 <div class="form-group">
-                    <form method="POST" action="" class=" p-1 mt-1">
-                      {{form_cep.csrf_token}}
-                      <h5 style="text-align:center">Buscar Cep</h5>
-                       <fieldset class="form-group">
-                         <div class="form-group" style="text-align:center">
-                            {{form_cep.cep.label(class="form-control-label")}}
-                            {% if form_cep.cep.errors %}
-                                {{ form_cep.cep(class="form-control is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for erro in form_cep.cep.errors %}
-                                    <span>{{ erro }}</span>
-                                {% endfor %}
-                            </div>
-                            {% else %}
-                                {{ form_cep.cep(class="form-control") }}
-                            {% endif %}
-                         </div>
-                         <div class="col col2 form-group" style="text-align:center" >
-                           {{form_cep.botao_submit_cep(class="btn btn-primary mt-2")}}
-                         </div>
-                       </fieldset>
-                    </form>
-                     {% if form_cep.cep.data %}
-                        <div>
-                            <button type="button" class="btn btn-light mt-1 p-2 "  disabled><strong>{{endereco}}</strong></button></br>
-                        </div>
-                     {% endif %}
+<main class="main">
+   <div class="credit">
+     <div class="divs divFixedCep  meupost2">
+         <div class="form-group">
+            <form method="POST" action="" class=" p-1 mt-1">
+              {{form_cep.csrf_token}}
+              <h5 style="text-align:center">Buscar Cep</h5>
+               <fieldset class="form-group">
+                 <div class="form-group" style="text-align:center">
+                    {{form_cep.cep.label(class="form-control-label")}}
+                    {% if form_cep.cep.errors %}
+                        {{ form_cep.cep(class="form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for erro in form_cep.cep.errors %}
+                            <span>{{ erro }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                        {{ form_cep.cep(class="form-control") }}
+                    {% endif %}
                  </div>
-             </div>
-           </div>
-        </main>
-             <div class=" divs divFixed  meupost2">
-                 <div class="form-group">
-                    <form method="POST" action="" class=" p-1 mt-1 border-radius: 20px;">
-                      {{form_moeda.csrf_token}}
-                      <h5 style="text-align:center">Buscar moeda</h5>
-                       <fieldset class="form-group">
-                         <div class="form-group" style="text-align:center">
-                            {{form_moeda.moeda.label(class="form-control-label")}}
-                            {% if form_moeda.moeda.errors %}
-                                {{ form_moeda.moeda(class="form-control is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for erro in form_moeda.moeda.errors %}
-                                    <span>{{ erro }}</span>
-                                {% endfor %}
-                            </div>
-                            {% else %}
-                                {{ form_moeda.moeda(class="form-control") }}
-                            {% endif %}
-                         </div>
-                         <div class="col col2 form-group" style="text-align:center" >
-                           {{form_moeda.botao_submit_cotacao(class="btn btn-primary mt-2")}}
-                         </div>
-                       </fieldset>
-                    </form>
-                     {% if form_moeda.moeda.data %}
-                        <div style="text-align:center">
-                            <button type="button" class=" btn btn-light mt-1 p-2 "  disabled><strong>R$ {{cotacoes_dicio[moeda]['bid']}}</strong></button></br>
-                            <p> {{cotacoes_dicio[moeda]['name']}} </p>
-                        </div>
-                     {% endif %}
+                 <div class="col col2 form-group" style="text-align:center" >
+                   {{form_cep.botao_submit_cep(class="btn btn-primary mt-2")}}
                  </div>
-             </div>
-             <div class=" row divs2 divFixedCard">
+               </fieldset>
+            </form>
+             {% if form_cep.cep.data %}
                 <div>
-                    <h5> Moedas:</h5>
-                    <p class="border mt-1 p-1">
-                        <strong>USD</strong> - Dollar </br>
-                        <strong>EUR</strong> - Euro</br>
-                        <strong>USD</strong> - Dollar Can</br>
-                        <strong>ARS</strong> - Peso Arg </br>
-                        <strong>GPB</strong> - Libra</br>
-                        <strong>BTC</strong> - Bitcoin</br>
-                        <strong>LTC</strong> - Litecoin</br>
-                        <strong>CHF</strong> - Franco</br>
-                        <strong>CNY</strong> - Yuan Chinês</br>
-                        <strong>JPY</strong> - Iene Japão</p>
+                    <button type="button" class="btn btn-light mt-1 p-2 "  disabled>
+                        <strong>{{endereco}}</strong>
+                    </button></br>
                 </div>
-             </div>
+             {% endif %}
+         </div>
+     </div>
+   </div>
+</main>
+     <div class=" divs divFixed  meupost2">
+         <div class="form-group">
+            <form method="POST" action="" class=" p-1 mt-1 border-radius: 20px;">
+              {{form_moeda.csrf_token}}
+              <h5 style="text-align:center">Buscar moeda</h5>
+               <fieldset class="form-group">
+                 <div class="form-group" style="text-align:center">
+                    {{form_moeda.moeda.label(class="form-control-label")}}
+                    {% if form_moeda.moeda.errors %}
+                        {{ form_moeda.moeda(class="form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for erro in form_moeda.moeda.errors %}
+                            <span>{{ erro }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                        {{ form_moeda.moeda(class="form-control") }}
+                    {% endif %}
+                 </div>
+                 <div class="col col2 form-group" style="text-align:center" >
+                   {{form_moeda.botao_submit_cotacao(class="btn btn-primary mt-2")}}
+                 </div>
+               </fieldset>
+            </form>
+             {% if form_moeda.moeda.data %}
+                <div style="text-align:center">
+                    <button type="button" class=" btn btn-light mt-1 p-2 "  disabled>
+                        <strong>R$ {{cotacoes_dicio[moeda]['bid']}}</strong>
+                    </button></br>
+                    <p> {{cotacoes_dicio[moeda]['name']}} </p>
+                </div>
+             {% endif %}
+         </div>
+     </div>
+     <div class=" row divs2 divFixedCard">
+        <div>
+            <h5> Moedas:</h5>
+            <p class="border mt-1 p-1">
+                <strong>USD</strong> - Dollar </br>
+                <strong>EUR</strong> - Euro</br>
+                <strong>USD</strong> - Dollar Can</br>
+                <strong>ARS</strong> - Peso Arg </br>
+                <strong>GPB</strong> - Libra</br>
+                <strong>BTC</strong> - Bitcoin</br>
+                <strong>LTC</strong> - Litecoin</br>
+                <strong>CHF</strong> - Franco</br>
+                <strong>CNY</strong> - Yuan Chinês</br>
+                <strong>JPY</strong> - Iene Japão</p>
+        </div>
+     </div>
 {% endblock %}
