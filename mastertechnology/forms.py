@@ -16,7 +16,7 @@ class FormLogin(FlaskForm):
 
 
 class FormCriarConta(FlaskForm):
-    username = StringField('Nome do Usuário', [validators.DataRequired(), validators.Length(min=4, max=25)])
+    username = StringField('Nome do Usuário', [validators.DataRequired(), validators.Length(min=4, max=20)])
     email = StringField('E-mail', [validators.DataRequired(), validators.Email(message='** E-mail Inválido **')])
     senha = PasswordField('Senha', [validators.DataRequired(),
                                     validators.EqualTo('confirmacao_senha',
