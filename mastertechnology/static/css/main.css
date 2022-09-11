@@ -91,7 +91,7 @@ body{
   border: 2px solid black;
   border-radius: 20px;
   position: fixed;
-  top: 150px;
+  top: 200px;
   right: 350px;
 }
 
@@ -107,7 +107,7 @@ body{
   border: 2px solid black;
   border-radius: 20px;
   position: fixed;
-  top: 150px;
+  top: 200px;
   left: 350px;
 }
 
@@ -115,7 +115,7 @@ body{
   background-color: azure;
 
   position: fixed;
-  top: 150px;
+  top: 200px;
   right: 150px;
 }
 
