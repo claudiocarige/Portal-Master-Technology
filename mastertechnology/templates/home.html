@@ -34,13 +34,14 @@
           <div class="posthome container col col-8 mt-0 meupost2">
              <div>
                <a style="text-decoration: none" href="{{ url_for('exibir_post', post_id=post.id)}}">
-                   <h5 style="text-align:center"><strong>{{ post.titulo }}</strong>
+                   <h5 style="text-align:center"  ><strong>{{ post.titulo }} </strong>
+                    <small title="Editar Post" style="font-size: 12px">- Editar Post</small>
                    </h5>
                </a>  <small class="text-muted" style="font-size: 12px" >
                  Data de criação: {{ post.data_criacao.strftime('%d/%m/%Y')}}</small>
                <hr>
              </div>
-              <p class="justext">{{ post.corpo_post }}</p>
+              <p style='text-align:justify' >{{ post.corpo_post }}</p>
           </div>
         </div>
     {% endfor %}

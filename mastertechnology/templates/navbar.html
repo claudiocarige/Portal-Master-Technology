@@ -1,6 +1,9 @@
 <nav class="navbar navbar-expand-lg   cabecalho menu__lista">
   <div class="container-fluid container ">
     <a class="navbar-brand" href="{{ url_for('home') }}"><strong style="color:blue">Master Technology</strong> </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
@@ -16,25 +19,20 @@
           <a class="nav-link" href="{{ url_for('consulta') }}" style="color: cornflowerblue">API</a>
         </li>
       </ul>
-      <ul class = "d_flex navbar-nav">
+      <ul class = "d_flex navbar-nav ">
          {% if current_user.is_authenticated%}
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('criar_post') }}" style="color: cornflowerblue">Criar Post</a>
             </li>
             <li class="nav-item">
                 {% if current_user.is_authenticated %}
-                <div class="box">
-                    <div class="p1">
-                    <a class="small" href="{{ url_for('perfil') }}" style="color: cornflowerblue">
-                        <center>Perfil<br>
-                        {{"{}".format(current_user.username)}}</center>
-                    </a>
-                    </div>
-                </div>
+                   <a class="nav-link" href="{{ url_for('perfil') }}" style="color: cornflowerblue">
+                       <p title="Editar perfil"><u>{{"{}".format(current_user.username)}}</u></p>
+                   </a>
                 {% endif %}
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('sair') }}" style="color: cornflowerblue">Sair</a>
+              <a class="nav-link small" href="{{ url_for('sair') }}" style="color: cornflowerblue">Sair</a>
             </li>
          {% else %}
             <li class="nav-item">
